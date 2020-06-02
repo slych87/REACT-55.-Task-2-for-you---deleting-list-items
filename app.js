@@ -1,8 +1,17 @@
+// const Person = (props) => {
+//   return (
+//     <li>
+//       <span>{props.name}</span>
+//       <button onClick={props.delete}>Usuń</button>
+//     </li>
+//   )
+// }
+
 const Person = (props) => {
   return (
     <li>
       <span>{props.name}</span>
-      <button onClick={props.delete}>Usuń</button>
+      <button onClick={() => props.delete(props.name)}>Usuń</button>
     </li>
   )
 }
@@ -27,7 +36,7 @@ class List extends React.Component {
   //   })
   // }
 
-  handelDelete(name) {
+  handelDelete = (name) => {
     // let people = Array.from(this.state.people);
     let people = this.state.people.slice();
     // console.log(people);
@@ -40,11 +49,17 @@ class List extends React.Component {
 
   render() {
 
+    // const people = this.state.people.map(person =>
+    //   <Person
+    //     key={person.id}
+    //     name={person.name}
+    //     delete={this.handelDelete.bind(this, person.name)} />)
+
     const people = this.state.people.map(person =>
       <Person
         key={person.id}
         name={person.name}
-        delete={this.handelDelete.bind(this, person.name)} />)
+        delete={this.handelDelete} />)
 
     return (
       <ul>{people}</ul>
